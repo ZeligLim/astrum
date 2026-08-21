@@ -1,0 +1,2 @@
+.brand img { display: block; width: 144px; height: auto; }
+footer .brand img { filter: invert(1); }
