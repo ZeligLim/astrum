@@ -194,11 +194,14 @@ export function Contact({ onSuccess }) {
       return;
     }
 
-    const subject = encodeURIComponent(`Project inquiry from ${name}`);
-    const body = encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\n\n${message}\n\n— Sent from the Astrum website`
-    );
-    window.location.href = `mailto:${studio.email}?subject=${subject}&body=${body}`;
+    const text = `Hi Astrum, I'd like to discuss a project.
+
+Name: ${name}
+Email: ${email}
+Project Notes: ${message}`;
+
+    const url = `https://wa.me/353894104660?text=${encodeURIComponent(text)}`;
+    window.open(url, "_blank", "noopener,noreferrer");
     onSuccess?.();
     setForm({ name: "", email: "", message: "" });
   };

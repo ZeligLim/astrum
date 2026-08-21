@@ -23,7 +23,7 @@ function App() {
   };
 
   const handleInquirySuccess = () => {
-    setNotice("Opening your email client — we’ll reply within one business day.");
+    setNotice("Opening WhatsApp — we’ll reply within one business day.");
     window.setTimeout(() => setNotice(""), 5000);
   };
 
