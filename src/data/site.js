@@ -71,6 +71,6 @@ export const testimonial = {
 };
 
 export const socials = [
-  { label: "Instagram", href: "https://www.instagram.com/astrum_malaysia/" },
+  { label: "Instagram", href: "https://www.instagram.com/astrum_dev" },
   { label: "WhatsApp", href: "https://wa.me/353894104660?text=Hi%20Astrum%2C%20I%27m%20interested%20in%20a%20website." },
 ];
