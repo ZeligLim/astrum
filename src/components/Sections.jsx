@@ -175,7 +175,7 @@ export function Quote() {
 }
 
 export function Contact({ onSuccess }) {
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [form, setForm] = useState({ name: "", message: "" });
   const [error, setError] = useState("");
 
   const update = (field) => (event) => {
@@ -186,24 +186,22 @@ export function Contact({ onSuccess }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const name = form.name.trim();
-    const email = form.email.trim();
     const message = form.message.trim();
 
-    if (!name || !email || !message) {
-      setError("Please fill in your name, email, and a short note.");
+    if (!name || !message) {
+      setError("Please fill in your name and a short note.");
       return;
     }
 
     const text = `Hi Astrum, I'd like to discuss a project.
 
 Name: ${name}
-Email: ${email}
 Project Notes: ${message}`;
 
     const url = `https://wa.me/353894104660?text=${encodeURIComponent(text)}`;
     window.open(url, "_blank", "noopener,noreferrer");
     onSuccess?.();
-    setForm({ name: "", email: "", message: "" });
+    setForm({ name: "", message: "" });
   };
 
   return (
@@ -217,8 +215,6 @@ Project Notes: ${message}`;
         </h2>
         <p className="contact-aside">
           {studio.location}
-          <br />
-          <a href={`mailto:${studio.email}`}>{studio.email}</a>
         </p>
       </div>
       <form className="contact-form" onSubmit={handleSubmit} noValidate>
@@ -231,17 +227,6 @@ Project Notes: ${message}`;
             value={form.name}
             onChange={update("name")}
             placeholder="Your name"
-          />
-        </label>
-        <label>
-          <span>Email</span>
-          <input
-            type="email"
-            name="email"
-            autoComplete="email"
-            value={form.email}
-            onChange={update("email")}
-            placeholder="you@company.com"
           />
         </label>
         <label>
@@ -274,7 +259,7 @@ export function Footer() {
         <img src={logo} alt="Astrum" width="144" height="35" />
       </a>
       <p>© {new Date().getFullYear()} {studio.name}</p>
-      <div>
+      <div style={{ display: "flex", gap: "20px", alignItems: "center" }}>
         {socials.map((item) => {
           const external = item.href.startsWith("http");
           return (
@@ -282,8 +267,18 @@ export function Footer() {
               key={item.label}
               href={item.href}
               {...(external ? { target: "_blank", rel: "noreferrer" } : {})}
+              style={{ opacity: 0.7, transition: "opacity 0.2s" }}
+              onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
+              onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.7")}
+              aria-label={item.label}
             >
-              {item.label}
+              <img
+                src={`https://cdn.simpleicons.org/${item.label.toLowerCase()}/f4f4ed`}
+                alt={item.label}
+                width="20"
+                height="20"
+                style={{ display: "block" }}
+              />
             </a>
           );
         })}
